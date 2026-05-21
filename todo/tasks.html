@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All tasks</title>
+</head>
+<body>
+{% if task_two %}
+    <h1>{{ task_two.0.title }}</h1>
+    <p>{{ task_two.0.description }}</p>
+{% else %}
+    <h1>Error Page not found</h1>
+{% endif %}
+</body>
+</html>
