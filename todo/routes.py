@@ -9,19 +9,19 @@ tasks_db = [
     {'id': 1, 'title': 'training', 'description': 'HELL YEAH'}
 ]
 
-@task_bp.route('/tasks')
+@task_bp.route('/')
 def get_all_task():
     return render_template('tasks.html', tasks_db=tasks_db)
 
 
 
-@task_bp.route('/task/<int: id>')
+@task_bp.route('/task/<int:id>')
 def get_all_tasks(id):
     task_two = []
     for task in tasks_db:
         if task.get('id') == id:
             task_two.append(task)
-    return render_template('task.html', tasks_two=task_two)
+    return render_template('task.html', task_two=task_two)
 
 
 
@@ -35,8 +35,32 @@ def  add_tasks():
     return render_template('add_task.html')
 
 
+@task_bp.route('/update/<int:id>', methods=['GET', 'post'])
+def update_task(id):
+    if request.method == 'post':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        print(title)
+        print(description)
+
+        for task in tasks_db:
+            if task == id:
+                task.update({'title': title}) 
+                task.update({'description': description})
+
+            return redirect(url_for('tasks.get_all_tasks'))
+        
+    task_two = []
+    for task in tasks_db:
+        if task.get('id') == id:
+            task_two.append(task)
+    return render_template('update.html', task_two=task_two)
+
 
 @task_bp.route('/delete/<int:id>', methods=['post'])
 def delete_task(id):
-    print(id)
-    return redirect(url_for('tasks'))
+    for task in tasks_db:
+        if task.get('id') == id:
+            tasks_db.remove(task)
+            break 
+    return redirect(url_for('tasks.get_all_tasks'))

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+</head>
+<body>
+    {% if task_two %}
+    <h1>{{ task_two.0.title }}</h1>
+    <p>{{ task_two.0.description }}</p>
+    <form action='{{ url_for("tasks.update_task", id=task_two.0.id) }} method="post"'>
+        <label>Title:</label><input name="title"><br>
+        <label>Description:</label><input name="description"><br>
+        <button>Update</button>
+    </form>
+</body>
+</html>
