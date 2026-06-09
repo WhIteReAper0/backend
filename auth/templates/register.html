@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+<h1>Register</h1>
+<form action="{{ url_for('auth.register') }}" method="post">
+    <label>Nickname:</label><input type="text" name="username"><br><br>
+    <label>Email:</label><input type="email" name="email"><br><br>
+    <label>Password:</label><input type="password" name="password"><br><br>
+    <button>Register</button>
+</form>
+</body>
+</html>
