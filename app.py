@@ -1,9 +1,9 @@
-from flask import Flask, jsonify 
+from flask import Flask, jsonify, render_template
 
 from todo.routes import task_bp
 from auth.templates.routes import auth_bp
-
-from flask_login import LoginManager
+from routes import profile_bp
+from flask_login import LoginManager, current_user
 
 from database.engine import db   
 from database.models.todo import Task
@@ -30,10 +30,13 @@ def load_user(user_id):
     return User.query.get(id=int(user_id)).first()
 
 
+@app.route('/')
+def main():
+    return render_template('main.html', current_user=current_user)
 
 app.register_blueprint(task_bp, url_prefix='/tasks')
 app.register_blueprint(auth_bp, url_prefix='/auth')
-
+app.register_blueprint(profile_bp, url_prefix='/profile')
 
 
 if __name__ == '__main__':

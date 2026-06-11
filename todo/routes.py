@@ -4,7 +4,7 @@ from database.engine import db
 from database.models.todo import Task
 from database.models.auth import User 
 
-task_bp = Blueprint('tasks', __name__, template_folder='templates')
+task_bp = Blueprint('task_bp', __name__, template_folder='templates')
 
 
 @task_bp.route('/')
@@ -12,7 +12,7 @@ def get_all_task():
     return render_template('tasks.html')
 
 
-@tasks_bp.route('/task/<int:id>')
+@task_bp.route('/task/<int:id>')
 def detail_task(id):
     task = Task.query.filter_by(id=id).first()
     return render_template('detail.html', task_two=task)
@@ -53,14 +53,14 @@ def update_task(id):
         db.session.commit()
 
      
-            if task == id:
+        if task == id:
                 task.update({'title': title}) 
                 task.update({'description': description})
 
-            return redirect(url_for('tasks.get_all_tasks'))
+        return redirect(url_for('tasks.get_all_tasks'))
         
     task_two = []
-        if task.get('id') == id:
+    if task.get('id') == id:
             task_two.append(task)
     return render_template('update.html', task_two=task_two)
 

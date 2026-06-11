@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 
 from database.models.auth import User
 from database.engine import db 
@@ -25,7 +25,7 @@ def register():
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    if request.method == 'post':
         email = request.form.get('email')
         password = request.form.get('password')
         user = User.query.filter_by(email=email).first()
@@ -43,3 +43,7 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
+
+
+
+
