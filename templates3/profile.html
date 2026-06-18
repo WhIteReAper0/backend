@@ -6,7 +6,8 @@
     <title>Profile</title>
 </head>
 <body>
-    {% if current_user is_authenticated %}
     
+<p>{% current_user.username %}</p>
+<p>{% current_user.email %}</p>    
 </body>
 </html>
